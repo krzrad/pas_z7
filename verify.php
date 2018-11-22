@@ -29,9 +29,13 @@
 				header("Location: yourFolder.php");
 			} else {
 				$loginGood = 0;
-				mysqli_query($connect, "UPDATE users SET failedLogin = '".$date."'
+				mysqli_query($connect, "UPDATE users SET failedLogin = '".$date."', tries = '". $rekord['tries']+1 ."
 				WHERE idU= '".$rekord['idu']."';");
-				echo "Błąd";
+				if($date-$rekord['failedLogin']<$lockoutTime) {
+					echo "Przykro mi, ale zostałeś zablokowany :(";
+				} else {
+					echo "Błąd";
+				}
 			}
 			mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidłowe) VALUES ('"
 			.$rekord['idu']."','".$date."','".$loginGood."');");
