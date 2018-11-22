@@ -14,7 +14,7 @@
 			echo "Error: ".mysqli_connect_error().PHP_EOL;
 			exit;
 		};
-		$result = mysqli_query($connect, "SELECT * FROM users WHERE nazwisko='$login'"); 
+		$result = mysqli_query($connect, "SELECT * FROM users WHERE login='$login'"); 
 		$rekord = mysqli_fetch_array($result);
 		if(!$rekord){
 			if ($password==$repeat){

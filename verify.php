@@ -1,4 +1,7 @@
 <?php
+	$badLoginLimit = 3;
+	$lockoutTime = 60;
+
 	$login = $_POST['user'];
 	$password = $_POST['pass'];
 	if(IsSet($_POST['user'],$_POST['pass'])){
@@ -16,13 +19,22 @@
 		$result = mysqli_query($connect, "SELECT * FROM users WHERE login='$login'"); 
 		$rekord = mysqli_fetch_array($result);
 		if($rekord){
+			$czas = time();
+			$date = date("Y-m-d H:i:s",$czas);
 			if($rekord['haslo']==$password){
 				$loginGood = 1;
+				mysqli_query($connect, "UPDATE users SET tries = '0'
+				WHERE idU= '".$rekord['idu']."';");
+				setcookie("user",$rekord['login'],$czas+3600);
+				header("Location: yourFolder.php");
 			} else {
 				$loginGood = 0;
+				mysqli_query($connect, "UPDATE users SET failedLogin = '".$date."'
+				WHERE idU= '".$rekord['idu']."';");
+				echo "Błąd";
 			}
 			mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidłowe) VALUES ('"
-			.$rekord['idu']."','".date("Y-m-d H:i:s",time())."','".$loginGood."');");
+			.$rekord['idu']."','".$date."','".$loginGood."');");
 		} else {
 			echo 'Dane logowania nieprawidłowe!<br><a href="login.html">Wróć</a>';
 		}
