@@ -7,7 +7,7 @@
 	if(IsSet($_POST['user'],$_POST['pass'])){
 		$DBhost = 'sql.kradowskipas.nazwa.pl:3306';
 		$DBuser = 'kradowskipas_chmurka';
-		$DBpassword ='Zadanie7';
+		$DBpassword ='zAdanie7';
 		$DBname = 'kradowskipas_chmurka';
 		$connect = mysqli_connect($DBhost,$DBuser,$DBpassword,$DBname);
 		if(!$connect){
