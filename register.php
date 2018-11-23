@@ -4,7 +4,7 @@
 	$repeat = $_POST['repeat'];
 	if(IsSet($_POST['user'],$_POST['pass'],$_POST['repeat'])){
 		$DBhost = 'sql.kradowskipas.nazwa.pl:3306';
-		$DBuser = 'kradowskipas_chumrka';
+		$DBuser = 'kradowskipas_chmurka';
 		$DBpassword ='zAdanie7';
 		$DBname = 'kradowskipas_chmurka';
 		$connect = mysqli_connect($DBhost,$DBuser,$DBpassword,$DBname);
