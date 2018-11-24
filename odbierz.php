@@ -1,5 +1,5 @@
 <?php
-	$max_rozmiar = 1000;
+	$max_rozmiar = 1000000;
 	if (is_uploaded_file($_FILES['plik']['tmp_name']))
 	{
 		if ($_FILES['plik']['size'] > $max_rozmiar) {echo "Przekroczenie rozmiaru $max_rozmiar"; }
