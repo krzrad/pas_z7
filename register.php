@@ -18,7 +18,7 @@
 		$rekord = mysqli_fetch_array($result);
 		if(!$rekord){
 			if ($password==$repeat){
-				mysqli_query($connect,"INSERT INTO users (login,haslo) values ('$login','$password')") or die(mysqli_error($connect));
+				mysqli_query($connect,"INSERT INTO users (login,haslo) values ('$login','".md5($password)."')") or die(mysqli_error($connect));
 				header("Location: login.html");
 				exit;
 			} else { echo 'hasła się nie zgadzają!<br><a href=/"rejestracja.html/">Wróć</a>';}
