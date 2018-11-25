@@ -1,3 +1,6 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head> 
 <?php
 	$DBhost = 'sql.kradowskipas.nazwa.pl:3306';
 	$DBuser = 'kradowskipas_chmurka';
@@ -10,7 +13,20 @@
 		echo "Error: ".mysqli_connect_error().PHP_EOL;
 		exit;
 	};
-	$result = mysqli_query($connect, "SELECT * FROM users WHERE login='$login'"); 
+	$result = mysqli_query($connect, "SELECT * FROM logi WHERE idU = (SELECT idU FROM users WHERE login='".$_COOKIE['user']."') 
+	ORDER BY dataGodzina DESC LIMIT 2;");
+	$i = 0;
+	$check;
+	while($rekord=mysqli_fetch_array($result)){
+		$check[i]=$rekord['prawidlowe'];
+		$i++;
+	}
+	if($check[0]!=check[1]){
+		$result = mysqli_query($connect,"SELECT dataGodzina FROM logi WHERE idU = (
+		SELECT idU FROM users WHERE login='".$_COOKIE['user']."'
+		) and prawidlowe = 0 ORDER BY dataGodzina DESC LIMIT 2;");
+		echo "<div id=\"ostrzezenie\">O ".mysqli_fetch_array($result)['dataGodzina']." doszło do błędnego logowania!</div>";
+	}
 	$dirHandle = opendir("./".$_COOKIE['user']);
 	while (($plik=readdir($dirHandle))!== false){
 		echo "plik: $plik<br/>";

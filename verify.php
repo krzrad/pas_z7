@@ -42,7 +42,7 @@
 				echo 'Dane logowania nieprawidłowe!<br><a href="login.php">Wróć</a>';
 			}
 			mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidlowe) VALUES ('"
-			.$rekord['idU']."','".time()."','".$loginGood."');") or die(mysqli_error($connect));
+			.$rekord['idU']."','".date("Y-m-d H:i:s",time())."','".$loginGood."');") or die(mysqli_error($connect));
 		} else {
 			echo 'Dane logowania nieprawidłowe!<br><a href="login.php">Wróć</a>';
 		}
