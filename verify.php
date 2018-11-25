@@ -23,7 +23,7 @@
 			$tries = $rekord['tries'];
 			if(($tries >= $badLoginLimit)
 			&&(time()-$failedLogin < lockoutTime)){
-				echo 'Przykro mi, ale zostałeś zablokowany :(<br><a href="login.html">Wróć</a>';
+				echo 'Przykro mi, ale zostałeś zablokowany :(<br><a href="login.php">Wróć</a>';
 			} else if($rekord['haslo']==$password){
 				$loginGood = 1;
 				mysqli_query($connect, "UPDATE users SET tries = '0'
@@ -39,11 +39,12 @@
 					mysqli_query($connect, "UPDATE users SET failedLogin = '".time()."',
 					tries = '".$tries++."' WHERE idU= '".$rekord['idu']."';");
 				}
+				echo 'Dane logowania nieprawidłowe!<br><a href="login.php">Wróć</a>';
 			}
 			mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidłowe) VALUES ('"
 			.$rekord['idu']."','".time()."','".$loginGood."');");
 		} else {
-			echo 'Dane logowania nieprawidłowe!<br><a href="login.html">Wróć</a>';
+			echo 'Dane logowania nieprawidłowe!<br><a href="login.php">Wróć</a>';
 		}
 		mysqli_close($connect);
 	}

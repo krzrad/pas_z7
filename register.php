@@ -21,7 +21,7 @@
 				mysqli_query($connect,"INSERT INTO users (login,haslo) values ('$login','".md5($password)."')")
 				or die(mysqli_error($connect));
 				mkdir("./".$login);
-				header("Location: login.html");
+				header("Location: login.php");
 				exit;
 			} else { echo 'hasła się nie zgadzają!<br><a href=/"rejestracja.html/">Wróć</a>';}
 		} else {
