@@ -29,6 +29,8 @@
 				mysqli_query($connect, "UPDATE users SET tries = '0'
 				WHERE idU= '".$rekord['idu']."';");
 				setcookie("user",$rekord['login'],time()+3600);
+				mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidlowe) VALUES ('"
+				.$rekord['idu']."','".time()."','".$loginGood."');") or die(mysql_error($connect));
 				header("Location: yourFolder.php");
 			} else {
 				$loginGood = 0;
@@ -39,10 +41,10 @@
 					mysqli_query($connect, "UPDATE users SET failedLogin = '".time()."',
 					tries = '".$tries++."' WHERE idU= '".$rekord['idu']."';");
 				}
+				mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidlowe) VALUES ('"
+				.$rekord['idu']."','".time()."','".$loginGood."');") or die(mysql_error($connect));
 				echo 'Dane logowania nieprawidłowe!<br><a href="login.php">Wróć</a>';
 			}
-			mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidłowe) VALUES ('"
-			.$rekord['idu']."','".time()."','".$loginGood."');");
 		} else {
 			echo 'Dane logowania nieprawidłowe!<br><a href="login.php">Wróć</a>';
 		}
