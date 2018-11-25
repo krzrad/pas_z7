@@ -18,10 +18,10 @@
 	$i = 0;
 	$check;
 	while($rekord=mysqli_fetch_array($result)){
-		$check[i]=$rekord['prawidlowe'];
+		$check[$i]=$rekord['prawidlowe'];
 		$i++;
 	}
-	if($check[0]!=check[1]){
+	if($check[0]!=$check[1]){
 		$result = mysqli_query($connect,"SELECT dataGodzina FROM logi WHERE idU = (
 		SELECT idU FROM users WHERE login='".$_COOKIE['user']."'
 		) and prawidlowe = 0 ORDER BY dataGodzina DESC LIMIT 2;");
@@ -29,9 +29,11 @@
 	}
 	$dirHandle = opendir("./".$_COOKIE['user']);
 	while (($plik=readdir($dirHandle))!== false){
+		if($plik!="." and $plik!="..")
 		echo "plik: $plik<br/>";
 	}
 	closedir($dirHandle);
 ?>
 <a href="wyslij.html">Prześlij plik</a><br>
+<a href="podkatalog.html">Utwórz nowy katalog</a><br>
 <a href="logout.php">Wyloguj</a>
