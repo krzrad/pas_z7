@@ -27,24 +27,22 @@
 			} else if($rekord['haslo']==$password){
 				$loginGood = 1;
 				mysqli_query($connect, "UPDATE users SET tries = '0'
-				WHERE idU= '".$rekord['idu']."';");
+				WHERE idU= '".$rekord['idU']."';");
 				setcookie("user",$rekord['login'],time()+3600);
-				mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidlowe) VALUES ('"
-				.$rekord['idu']."','".time()."','".$loginGood."');") or die(mysql_error($connect));
 				header("Location: yourFolder.php");
 			} else {
 				$loginGood = 0;
 				if(time() - $failedLogin > $lockoutTime){
 					mysqli_query($connect, "UPDATE users SET failedLogin = '".time()."',
-					tries = '1' WHERE idU= '".$rekord['idu']."';");
+					tries = '1' WHERE idU= '".$rekord['idU']."';");
 				} else {
 					mysqli_query($connect, "UPDATE users SET failedLogin = '".time()."',
-					tries = '".$tries++."' WHERE idU= '".$rekord['idu']."';");
+					tries = '".$tries++."' WHERE idU= '".$rekord['idU']."';");
 				}
-				mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidlowe) VALUES ('"
-				.$rekord['idu']."','".time()."','".$loginGood."');") or die(mysql_error($connect));
 				echo 'Dane logowania nieprawidłowe!<br><a href="login.php">Wróć</a>';
 			}
+			mysqli_query($connect, "INSERT INTO logi (idu,dataGodzina, prawidlowe) VALUES ('"
+			.$rekord['idU']."','".time()."','".$loginGood."');") or die(mysqli_error($connect));
 		} else {
 			echo 'Dane logowania nieprawidłowe!<br><a href="login.php">Wróć</a>';
 		}
