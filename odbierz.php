@@ -10,5 +10,5 @@
 			move_uploaded_file($_FILES['plik']['tmp_name'],$_SERVER['DOCUMENT_ROOT'].$_COOKIE['user'].$_FILES['plik']['name']);
 		}
 	}
-	else {echo 'Błąd przy przesyłaniu danych!';}
+	else {echo 'Błąd przy przesyłaniu danych!<br><a href=/"yourFolder.php/">Wróć</a>';}
 ?>
