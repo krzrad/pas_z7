@@ -1,5 +1,5 @@
 <?php
-	$file = 'null';
+	$file = './'.$_COOKIE['user']."/".$_GET['file'];
 
 	if (file_exists($file)) {
 		header('Content-Description: File Transfer');

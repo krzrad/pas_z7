@@ -29,11 +29,16 @@
 	}
 	$dirHandle = opendir("./".$_COOKIE['user']);
 	while (($plik=readdir($dirHandle))!== false){
-		if($plik!="." and $plik!="..")
-		echo "plik: $plik<br/>";
+		if($plik!="." and $plik!=".."){
+			if(is_file("./".$_COOKIE['user']."/".$plik)){
+				echo '<a href="download.php?file='.$plik.'">'.$plik.'</a><br/>';
+			} else if(is_dir("./".$_COOKIE['user']."/".$plik)){
+				echo '<a href="subcat.php?cat='.$plik.'">'.$plik.'</a><br/>';
+			}
+		}
 	}
 	closedir($dirHandle);
 ?>
 <a href="wyslij.html">Prześlij plik</a><br>
-<a href="podkatalog.html">Utwórz nowy katalog</a><br>
+<a href="tworzkat.html">Utwórz nowy katalog</a><br>
 <a href="logout.php">Wyloguj</a>
