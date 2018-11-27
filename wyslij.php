@@ -1,5 +1,5 @@
 <?php
-	//$cat=$_GET['cat'];
+	$cat=$_GET['cat'];
 	echo "<html>
 		<body>
 			<form action=\"odbierz.php\" method=\"POST\" ENCTYPE=\"multipart/form-data\">

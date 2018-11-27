@@ -34,15 +34,44 @@
 		while (($plik=readdir($dirHandle))!== false){
 			if($plik!="." and $plik!=".."){
 				if(is_file("./".$_COOKIE['user']."/".$plik)){
-					echo '<a href="download.php?file='.$plik.'">'.$plik.'</a><br/>';
+					echo '<div class="col-1 col-s-1"><a href="download.php?file='.$plik.'">';
+					switch(mime_content_type("./".$_COOKIE['user']."/".$plik)){
+						case "image/gif":
+							echo '<img src="image_gif.svg">';
+							break;
+						case "image/jpeg":
+							echo '<img src="image_jpg.svg">';
+							break;
+						case "image/png":
+							echo '<img src="image_png.svg">';
+							break;
+						case "image/x-ms-bmp":
+							echo '<img src="image_bmp.svg">';
+							break;
+						case "text/plain":
+							echo '<img src="text.svg">';
+							break;
+						default :
+							echo '<img src="file.svg">';
+							break;
+					}
+					echo '</a>'.$plik.' '.mime_content_type("./".$_COOKIE['user']."/".$plik).'<br/></div>';
 				} else if(is_dir("./".$_COOKIE['user']."/".$plik)){
-					echo '<a href="subcat.php?cat='.$plik.'">'.$plik.'</a><br/>';
+					echo '<div class="col-1 col-s-1">
+					<a href="subcat.php?cat='.$plik.'"><img src="directory.svg"></a>'.$plik.'<br/>
+					</div>';
 				}
 			}
 		}
 		closedir($dirHandle);
 		echo '<a href="wyslij.php">Prześlij plik</a><br>
-			<a href="tworzkat.html">Utwórz nowy katalog</a><br>
-			<a href="logout.php">Wyloguj</a>';
+			<div class="row">
+				<div class="col-1 col-s-1">
+					<a href="tworzkat.php"><img src="newdir.svg"></a>Utwórz nowy katalog<br>
+				</div>
+				<div class="col-1 col-s-1">
+					<a href="logout.php"><img src="logout.svg"></a>Wyloguj
+				</div>
+			</div>';
 	}
 ?>
