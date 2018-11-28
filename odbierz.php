@@ -12,10 +12,13 @@
 				echo 'Odebrano plik: '.$_FILES['plik']['name'].'<br/>';
 				if (isset($_FILES['plik']['type'])) {echo 'Typ: '.$_FILES['plik']['type'].'<br/>'; }
 				if ($cat != null) {$ext=$cat.DIRECTORY_SEPARATOR;}
-				$path = $_SERVER['DOCUMENT_ROOT'].$_COOKIE['user'].DIRECTORY_SEPARATOR.$ext;
-				move_uploaded_file($_FILES['plik']['tmp_name'],$path.$_FILES['plik']['name']);
+				$path = $_SERVER['DOCUMENT_ROOT']."zadanie7".DIRECTORY_SEPARATOR.$_COOKIE['user'].DIRECTORY_SEPARATOR.$ext;
+				move_uploaded_file($_FILES['plik']['tmp_name'],
+				$path.$_FILES['plik']['name']);
+				echo '<a href="yourFolder.php">Wróć</a>';
 			}
 		}
-		else {echo 'Błąd przy przesyłaniu danych!<br><a href=\"yourFolder.php\">Wróć</a>';}
+		else {echo 'Błąd przy przesyłaniu danych!<br><a href="yourFolder.php">Wróć</a>';}
+		
 	}
 ?>

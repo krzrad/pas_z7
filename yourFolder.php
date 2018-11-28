@@ -64,12 +64,12 @@
 			}
 		}
 		closedir($dirHandle);
-		echo '<a href="wyslij.php">Prześlij plik</a><br>
-			<div class="row">
+		echo '<div class="row">
 				<div class="col-1 col-s-1">
-					<a href="tworzkat.php"><img src="newdir.svg"></a>Utwórz nowy katalog<br>
+					<a href="wyslij.php"><img src="upload_file.svg"></a>Prześlij plik
 				</div>
 				<div class="col-1 col-s-1">
+					<a href="tworzkat.php"><img src="newdir.svg"></a>Utwórz nowy katalog
 					<a href="logout.php"><img src="logout.svg"></a>Wyloguj
 				</div>
 			</div>';
